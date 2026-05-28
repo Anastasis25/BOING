@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Boing</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; width: 100%; }
+  body {
+    background: #0a0a0a;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Title only on desktop / when there's room */
+  h1 {
+    font-size: 2.5rem;
+    letter-spacing: 0.5rem;
+    margin-bottom: 0.75rem;
+    color: #00ff88;
+    text-shadow: 0 0 20px #00ff88;
+  }
+
+  /* Menu overlay */
+  #menu {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    z-index: 10;
+    padding: 1rem;
+  }
+  #menu h2 {
+    color: #00ff88;
+    font-size: 1.5rem;
+    letter-spacing: 0.3rem;
+    margin-bottom: 0.5rem;
+  }
+  .btn {
+    background: transparent;
+    color: #00ff88;
+    border: 2px solid #00ff88;
+    padding: 1rem 2rem;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    letter-spacing: 0.2rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    min-width: 240px;
+    text-align: center;
+  }
+  .btn:hover, .btn:active {
+    background: #00ff88;
+    color: #000;
+    box-shadow: 0 0 20px #00ff88;
+  }
+  .hint {
+    color: #666;
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  canvas {
+    background: #000;
+    border: 2px solid #00ff88;
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+    display: block;
+    outline: none;
+    touch-action: none;
+  }
+
+  .info {
+    margin-top: 0.75rem;
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  .info strong { color: #00ff88; }
+
+  /* Hide title and info on small screens to maximize playfield */
+  @media (max-width: 600px), (max-height: 600px) {
+    h1 { display: none; }
+    .info { display: none; }
+    body { padding: 0; }
+    canvas { border-width: 0; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+  <h1>BOING</h1>
+  <canvas id="game" tabindex="0"></canvas>
+  <div class="info">
+    <strong>1P:</strong> W/S or &uarr;/&darr; or mouse &nbsp;|&nbsp; <strong>2P:</strong> top player uses A/D, bottom uses &larr;/&rarr; (mobile: drag your side)<br>
+    First to 7 wins. Press <strong>SPACE</strong> to serve.
+  </div>
+
+  <div id="menu">
+    <h2>BOING</h2>
+    <button class="btn" id="btn1p">1 PLAYER vs CPU</button>
+    <button class="btn" id="btn2p">2 PLAYERS</button>
+    <div class="hint" id="orientationHint"></div>
+  </div>
+
+<script>
+(() => {
+const canvas = document.getElementById('game');
+const ctx = canvas.getContext('2d');
+const menu = document.getElementById('menu');
+const orientationHint = document.getElementById('orientationHint');
+
+// ---------- State ----------
+let mode = null;              // '1p' or '2p'
+let isPortrait = false;       // true => vertical playfield (paddles at top & bottom)
+let W = 800, H = 500;         // canvas pixel dims
+
+const WIN_SCORE = 7;
+
+const paddle = { thick: 12, len: 90, speed: 7 };
+
+// p1 = "left" in landscape / "bottom" in portrait (you, the local user)
+// p2 = "right" in landscape / "top" in portrait (CPU in 1p, second human in 2p)
+const p1 = { pos: 0, score: 0 };
+const p2 = { pos: 0, score: 0 };
+
+const ball = {
+  x: 0, y: 0,
+  size: 12,
+  vx: 0, vy: 0,
+  speed: 5,
+  live: false
+};
+
+let gameOver = false;
+let messageText = '';
+let messageTimer = 0;
+
+// Input
+const keys = {};
+let p1Touch = null;   // {pos} — used by mobile drag for player 1
+let p2Touch = null;   // mobile drag for player 2
+let mouseActive = false;
+let mousePos = 0;     // along the paddle's movement axis
+
+// ---------- Layout ----------
+function resize() {
+  const margin = (window.innerWidth < 600 || window.innerHeight < 600) ? 0 : 40;
+  const titleSpace = (window.innerWidth < 600 || window.innerHeight < 600) ? 0 : 160;
+  const availW = window.innerWidth - margin;
+  const availH = window.innerHeight - titleSpace;
+
+  isPortrait = availH > availW;
+
+  if (isPortrait) {
+    W = Math.min(availW, 600);
+    H = Math.min(availH, W * 1.6);
+  } else {
+    H = Math.min(availH, 600);
+    W = Math.min(availW, H * 1.6);
+  }
+  canvas.width = W;
+  canvas.height = H;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+
+  // Recenter paddles on the axis they slide along
+  const axisLen = isPortrait ? W : H;
+  p1.pos = axisLen/2 - paddle.len/2;
+  p2.pos = axisLen/2 - paddle.len/2;
+
+  // Recenter ball if not in play
+  if (!ball.live) {
+    ball.x = W/2 - ball.size/2;
+    ball.y = H/2 - ball.size/2;
+  }
+}
+window.addEventListener('resize', resize);
+window.addEventListener('orientationchange', resize);
+
+// ---------- Paddle geometry helpers ----------
+// Returns paddle bounding rect for a player given their slide position.
+function paddleRect(player, which) {
+  // which: 'p1' or 'p2'
+  if (isPortrait) {
+    // paddles horizontal, slide along x. p1 = bottom, p2 = top.
+    const y = which === 'p1' ? H - 20 - paddle.thick : 20;
+    return { x: player.pos, y, w: paddle.len, h: paddle.thick };
+  } else {
+    // paddles vertical, slide along y. p1 = left, p2 = right.
+    const x = which === 'p1' ? 20 : W - 20 - paddle.thick;
+    return { x, y: player.pos, w: paddle.thick, h: paddle.len };
+  }
+}
+
+// ---------- Serve / Reset ----------
+function serve(towardP1) {
+  ball.x = W/2 - ball.size/2;
+  ball.y = H/2 - ball.size/2;
+  const angle = (Math.random() * 0.5 - 0.25) * Math.PI; // ±45°
+  const dir = (towardP1 === undefined ? (Math.random() < 0.5) : towardP1) ? -1 : 1;
+  ball.speed = 5;
+  if (isPortrait) {
+    // ball travels primarily vertically. p1 is bottom (positive y), p2 is top.
+    // dir = -1 means toward p2 (up), +1 means toward p1 (down)
+    ball.vy = Math.cos(angle) * ball.speed * dir;
+    ball.vx = Math.sin(angle) * ball.speed;
+  } else {
+    ball.vx = Math.cos(angle) * ball.speed * dir;
+    ball.vy = Math.sin(angle) * ball.speed;
+  }
+  ball.live = true;
+}
+
+function resetGame() {
+  p1.score = 0;
+  p2.score = 0;
+  gameOver = false;
+  ball.live = false;
+  ball.x = W/2 - ball.size/2;
+  ball.y = H/2 - ball.size/2;
+  ball.vx = 0; ball.vy = 0;
+}
+
+function showMessage(t) { messageText = t; messageTimer = 90; }
+
+// ---------- Bounce ----------
+function bounceOff(player, which) {
+  const r = paddleRect(player, which);
+  if (isPortrait) {
+    // ball travels in y, paddle is horizontal — angle based on x offset
+    const center = r.x + r.w/2;
+    const offset = (ball.x + ball.size/2 - center) / (r.w/2);
+    const maxAngle = Math.PI / 3;
+    const angle = Math.max(-1, Math.min(1, offset)) * maxAngle;
+    const dir = ball.vy < 0 ? 1 : -1; // flip direction
+    ball.speed = Math.min(ball.speed + 0.3, 13);
+    ball.vy = Math.cos(angle) * ball.speed * dir;
+    ball.vx = Math.sin(angle) * ball.speed;
+    // nudge out
+    if (dir === 1) ball.y = r.y + r.h;
+    else           ball.y = r.y - ball.size;
+  } else {
+    const center = r.y + r.h/2;
+    const offset = (ball.y + ball.size/2 - center) / (r.h/2);
+    const maxAngle = Math.PI / 3;
+    const angle = Math.max(-1, Math.min(1, offset)) * maxAngle;
+    const dir = ball.vx < 0 ? 1 : -1;
+    ball.speed = Math.min(ball.speed + 0.3, 13);
+    ball.vx = Math.cos(angle) * ball.speed * dir;
+    ball.vy = Math.sin(angle) * ball.speed;
+    if (dir === 1) ball.x = r.x + r.w;
+    else           ball.x = r.x - ball.size;
+  }
+}
+
+function rectsOverlap(a, b) {
+  return a.x < b.x + b.w && a.x + a.w > b.x &&
+         a.y < b.y + b.h && a.y + a.h > b.y;
+}
+
+// ---------- Update ----------
+function update() {
+  const axisLen = isPortrait ? W : H;
+
+  // P1 input (you)
+  let p1Target = null;
+  if (p1Touch !== null) p1Target = p1Touch - paddle.len/2;
+  else if (mouseActive && mode === '1p') p1Target = mousePos - paddle.len/2;
+
+  if (p1Target !== null) {
+    p1.pos = p1Target;
+  } else {
+    // Keyboard. In 2p: P1 uses arrows. In 1p: P1 uses W/S OR arrows.
+    if (mode === '1p') {
+      if (keys['w'] || keys['arrowup'] || keys['arrowleft']) p1.pos -= paddle.speed;
+      if (keys['s'] || keys['arrowdown'] || keys['arrowright']) p1.pos += paddle.speed;
+    } else {
+      // 2p: bottom/left player = arrow keys
+      if (isPortrait) {
+        if (keys['arrowleft'])  p1.pos -= paddle.speed;
+        if (keys['arrowright']) p1.pos += paddle.speed;
+      } else {
+        if (keys['arrowup'])   p1.pos -= paddle.speed;
+        if (keys['arrowdown']) p1.pos += paddle.speed;
+      }
+    }
+  }
+  p1.pos = Math.max(0, Math.min(axisLen - paddle.len, p1.pos));
+
+  // P2 input — CPU in 1p, second human in 2p
+  if (mode === '1p') {
+    // CPU AI follows ball with cap
+    const r = paddleRect(p2, 'p2');
+    const center = isPortrait ? (r.x + r.w/2) : (r.y + r.h/2);
+    const target = isPortrait ? (ball.x + ball.size/2) : (ball.y + ball.size/2);
+    const diff = target - center;
+    const cpuSpeed = 5;
+    if (Math.abs(diff) > 6) p2.pos += Math.sign(diff) * cpuSpeed;
+  } else {
+    // Human 2: top/right player
+    let p2Target = null;
+    if (p2Touch !== null) p2Target = p2Touch - paddle.len/2;
+    if (p2Target !== null) {
+      p2.pos = p2Target;
+    } else {
+      if (isPortrait) {
+        if (keys['a']) p2.pos -= paddle.speed;
+        if (keys['d']) p2.pos += paddle.speed;
+      } else {
+        if (keys['w']) p2.pos -= paddle.speed;
+        if (keys['s']) p2.pos += paddle.speed;
+      }
+    }
+  }
+  p2.pos = Math.max(0, Math.min(axisLen - paddle.len, p2.pos));
+
+  if (messageTimer > 0) messageTimer--;
+  if (!ball.live) return;
+
+  ball.x += ball.vx;
+  ball.y += ball.vy;
+
+  // Wall bounces on the cross-axis
+  if (isPortrait) {
+    if (ball.x <= 0)            { ball.x = 0; ball.vx *= -1; }
+    if (ball.x + ball.size >= W){ ball.x = W - ball.size; ball.vx *= -1; }
+  } else {
+    if (ball.y <= 0)            { ball.y = 0; ball.vy *= -1; }
+    if (ball.y + ball.size >= H){ ball.y = H - ball.size; ball.vy *= -1; }
+  }
+
+  const ballRect = { x: ball.x, y: ball.y, w: ball.size, h: ball.size };
+  const r1 = paddleRect(p1, 'p1');
+  const r2 = paddleRect(p2, 'p2');
+
+  // Paddle collisions, only when traveling toward that paddle
+  if (isPortrait) {
+    if (ball.vy > 0 && rectsOverlap(ballRect, r1)) bounceOff(p1, 'p1');
+    else if (ball.vy < 0 && rectsOverlap(ballRect, r2)) bounceOff(p2, 'p2');
+  } else {
+    if (ball.vx < 0 && rectsOverlap(ballRect, r1)) bounceOff(p1, 'p1');
+    else if (ball.vx > 0 && rectsOverlap(ballRect, r2)) bounceOff(p2, 'p2');
+  }
+
+  // Scoring
+  if (isPortrait) {
+    if (ball.y + ball.size < 0) { p1.score++; showMessage(mode === '1p' ? 'You score!' : 'Bottom scores'); endRally(); }
+    else if (ball.y > H)        { p2.score++; showMessage(mode === '1p' ? 'CPU scores'  : 'Top scores'); endRally(); }
+  } else {
+    if (ball.x + ball.size < 0) { p2.score++; showMessage(mode === '1p' ? 'CPU scores'  : 'Right scores'); endRally(); }
+    else if (ball.x > W)        { p1.score++; showMessage(mode === '1p' ? 'You score!' : 'Left scores'); endRally(); }
+  }
+}
+
+function endRally() {
+  ball.live = false;
+  ball.x = W/2 - ball.size/2;
+  ball.y = H/2 - ball.size/2;
+  ball.vx = 0; ball.vy = 0;
+  if (p1.score >= WIN_SCORE || p2.score >= WIN_SCORE) gameOver = true;
+}
+
+// ---------- Draw ----------
+function draw() {
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, W, H);
+
+  // Center line
+  ctx.strokeStyle = '#1a4d3a';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([10, 12]);
+  ctx.beginPath();
+  if (isPortrait) { ctx.moveTo(0, H/2); ctx.lineTo(W, H/2); }
+  else            { ctx.moveTo(W/2, 0); ctx.lineTo(W/2, H); }
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Scores
+  ctx.fillStyle = '#00ff88';
+  ctx.font = `bold ${Math.floor(Math.min(W,H)*0.12)}px Courier New`;
+  ctx.textAlign = 'center';
+  if (isPortrait) {
+    ctx.save();
+    // top score (p2)
+    ctx.fillText(p2.score, W*0.25, H/2 - 20);
+    // bottom score (p1)
+    ctx.fillText(p1.score, W*0.75, H/2 + 60);
+    ctx.restore();
+  } else {
+    ctx.fillText(p1.score, W/2 - 80, 80);
+    ctx.fillText(p2.score, W/2 + 80, 80);
+  }
+
+  // Paddles
+  ctx.fillStyle = '#00ff88';
+  ctx.shadowColor = '#00ff88';
+  ctx.shadowBlur = 12;
+  const r1 = paddleRect(p1, 'p1');
+  const r2 = paddleRect(p2, 'p2');
+  ctx.fillRect(r1.x, r1.y, r1.w, r1.h);
+  ctx.fillRect(r2.x, r2.y, r2.w, r2.h);
+
+  // Ball
+  ctx.fillStyle = '#fff';
+  ctx.shadowColor = '#fff';
+  ctx.shadowBlur = 18;
+  ctx.fillRect(ball.x, ball.y, ball.size, ball.size);
+  ctx.shadowBlur = 0;
+
+  // Transient message
+  if (messageTimer > 0) {
+    ctx.fillStyle = '#00ff88';
+    ctx.font = `${Math.floor(Math.min(W,H)*0.04)}px Courier New`;
+    ctx.fillText(messageText, W/2, H*0.15);
+  }
+
+  // Overlay prompts
+  if (gameOver) {
+    const youWin = mode === '1p' ? p1.score >= WIN_SCORE : null;
+    let winner;
+    if (mode === '1p') winner = p1.score >= WIN_SCORE ? 'YOU WIN!' : 'CPU WINS';
+    else if (isPortrait) winner = p1.score >= WIN_SCORE ? 'BOTTOM WINS!' : 'TOP WINS!';
+    else winner = p1.score >= WIN_SCORE ? 'LEFT WINS!' : 'RIGHT WINS!';
+    ctx.font = `bold ${Math.floor(Math.min(W,H)*0.08)}px Courier New`;
+    ctx.fillStyle = (mode === '1p' && !youWin) ? '#ff4466' : '#00ff88';
+    ctx.fillText(winner, W/2, H/2 - 10);
+    ctx.font = `${Math.floor(Math.min(W,H)*0.028)}px Courier New`;
+    ctx.fillStyle = '#aaa';
+    ctx.fillText('SPACE or tap to play again', W/2, H/2 + 30);
+  } else if (!ball.live) {
+    ctx.font = `${Math.floor(Math.min(W,H)*0.03)}px Courier New`;
+    ctx.fillStyle = '#888';
+    ctx.fillText('SPACE or tap to serve', W/2, H*0.55);
+  }
+}
+
+function loop() {
+  update();
+  draw();
+  requestAnimationFrame(loop);
+}
+
+// ---------- Input handlers ----------
+window.addEventListener('keydown', e => {
+  const k = e.key.toLowerCase();
+  keys[k] = true;
+  if (e.key === ' ' || e.code === 'Space') {
+    e.preventDefault();
+    if (mode === null) return;
+    if (gameOver) resetGame();
+    else if (!ball.live) serve();
+  }
+  if (['arrowup','arrowdown','arrowleft','arrowright',' '].includes(e.key.toLowerCase()) ||
+      e.code === 'Space') {
+    e.preventDefault();
+  }
+  if (['w','s','a','d','arrowup','arrowdown','arrowleft','arrowright'].includes(k)) {
+    mouseActive = false;
+  }
+});
+window.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
+
+// Mouse (1p convenience on desktop)
+canvas.addEventListener('mousemove', e => {
+  if (mode !== '1p') return;
+  const rect = canvas.getBoundingClientRect();
+  mousePos = isPortrait
+    ? (e.clientX - rect.left) * (W / rect.width)
+    : (e.clientY - rect.top)  * (H / rect.height);
+  mouseActive = true;
+});
+canvas.addEventListener('click', () => {
+  if (mode === null) return;
+  if (gameOver) resetGame();
+  else if (!ball.live) serve();
+});
+
+// Touch — supports two simultaneous fingers, one per player in 2p mode
+function touchCoord(t) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: (t.clientX - rect.left) * (W / rect.width),
+    y: (t.clientY - rect.top)  * (H / rect.height)
+  };
+}
+
+// In portrait: top half controls p2, bottom half controls p1 (in 2p);
+// in 1p mode, anywhere controls p1.
+// In landscape: same idea, left/right halves.
+function assignTouch(t) {
+  const c = touchCoord(t);
+  if (mode === '1p') {
+    // single player only controls p1, no matter where they touch
+    p1Touch = isPortrait ? c.x : c.y;
+    return 'p1';
+  }
+  // 2-player: split by side
+  if (isPortrait) {
+    if (c.y > H/2) { p1Touch = c.x; return 'p1'; }
+    else           { p2Touch = c.x; return 'p2'; }
+  } else {
+    if (c.x < W/2) { p1Touch = c.y; return 'p1'; }
+    else           { p2Touch = c.y; return 'p2'; }
+  }
+}
+
+const activeTouches = {}; // id -> 'p1' | 'p2'
+
+canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
+  if (mode === null) return;
+  for (const t of e.changedTouches) {
+    const which = assignTouch(t);
+    activeTouches[t.identifier] = which;
+  }
+  // Tap also serves/restarts when ball isn't live
+  if (gameOver) resetGame();
+  else if (!ball.live) serve();
+}, { passive: false });
+
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  for (const t of e.changedTouches) {
+    const which = activeTouches[t.identifier];
+    if (!which) continue;
+    const c = touchCoord(t);
+    const v = isPortrait ? c.x : c.y;
+    if (which === 'p1') p1Touch = v;
+    else p2Touch = v;
+  }
+}, { passive: false });
+
+function endTouch(e) {
+  for (const t of e.changedTouches) {
+    const which = activeTouches[t.identifier];
+    if (which === 'p1') p1Touch = null;
+    else if (which === 'p2') p2Touch = null;
+    delete activeTouches[t.identifier];
+  }
+}
+canvas.addEventListener('touchend', endTouch);
+canvas.addEventListener('touchcancel', endTouch);
+
+// ---------- Menu ----------
+function startGame(m) {
+  mode = m;
+  resetGame();
+  menu.style.display = 'none';
+  canvas.focus();
+}
+document.getElementById('btn1p').addEventListener('click', () => startGame('1p'));
+document.getElementById('btn2p').addEventListener('click', () => startGame('2p'));
+
+// Helpful orientation hint on small screens
+function updateOrientationHint() {
+  if (window.innerWidth < 600) {
+    orientationHint.textContent = isPortrait
+      ? '📱 Portrait mode — paddles top & bottom. Drag your half of the screen.'
+      : '📱 Landscape mode — paddles left & right. Drag your half.';
+  } else {
+    orientationHint.textContent = 'Tip: rotate your phone — the layout adapts.';
+  }
+}
+
+resize();
+updateOrientationHint();
+window.addEventListener('resize', updateOrientationHint);
+loop();
+
+})();
+</script>
+</body>
+</html>
