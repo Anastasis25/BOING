@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Boing</title>
+
+<!-- PWA -->
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjogIkJvaW5nIiwgInNob3J0X25hbWUiOiAiQm9pbmciLCAiZGVzY3JpcHRpb24iOiAiQSBQb25nLXN0eWxlIGFyY2FkZSBnYW1lLiIsICJzdGFydF91cmwiOiAiLi8iLCAic2NvcGUiOiAiLi8iLCAiZGlzcGxheSI6ICJmdWxsc2NyZWVuIiwgIm9yaWVudGF0aW9uIjogImFueSIsICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMDAwMDAiLCAidGhlbWVfY29sb3IiOiAiIzAwZmY4OCIsICJpY29ucyI6IFt7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1BQUFBREFDQUlBQUFEZHZ2dFFBQUFHOEVsRVFWUjRuTzNkZlV4VmRSekg4Yy9sU1JBb01VTlRVZExzQ2FYWm9BYmFkR1ptclRMVFdmNVRTM3QrWHB1TFdsbXVKMXQvOU9SV0xheTJIbXl1TW11VkxYUldwaVd1b1lXMVFrdEhQb1pJQ2lpUC9YRVAzQXZCT1hLL2QzQTV2bDl6ODl4emp1ZGM4TDNmUGZmOGVKQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFEaEpCYXdIYUYwYWphZUJQaFVvaXZpZnhrWHhhZUFrbEJDZHd4Z1NSbDh5djRBd0FzR0VnR0JDUURBaElKZ1FFRXdJQ0NZRTVHYjQxWVhEcnk3czYyY1Iwd2dJSmdRRUV3S0NDUUhCaElCZ0VxWEpWSi9hODluR3ZuNEtzWTRSQ0NZRUJCTUNnZ2tCd1lTQTNEQ1Y0WW1BWUVKQU1DRWdtQkFRVFB4eUozck5BbDErZHVoaFU0c08xYWxzcjk3YW9nKzJkdGl6WUpTS3BxcHd0TklIcUxKR3E3ZnJxWFdxcmcvdE1EbGIzOTBSWE56anJMckcrWHRYdGJLZms2UWY3dGJGV1pLMGNwdXVmOS9aT3Ywc2ZYMkxKTjI1U3EvOTJPR2tjOGJyNWp6bGoxUkdpcXJydFg2bmxtM1NkMzlHNFFQdmEzNEpxSk9FT0dXbWFjWTR6Umlud3RHNjcxTm4vYnhjclppdnVMYnZ4eDE3bWg2OFJMTnpOT2xWN1QwU3lZbXV6ZEdRVlAxVDIrME9TZkY2N3diTm5SQmFrNW1tZWJtYWw2djB4VHJhRU1sSlk0bnZYc0x5bHlsUXBOVEhOUHNkTlRaTDByMkZHak5Za29hbXFYaU80Z0txYTlUMFlxVXYxZ3NiSk9uTXdYcGxWdWdJRy81U29FaUJJazE4MlZsVHZ0OVpFeHgrd2lYRjY4WUwzWjdQTXpPZGVuWWUwbVhGU25sVVdjOXFTWW1hV3FMeTRmWTUzd1VVVk5lb1Q4cTFmcWZ6Y01Jd1NWcVlyL1FCa3ZSbXFkWlc2R2lESHZwU0Iyc2w2Ym9jWlowYTRia1c1bmU3YVZpNjdwOGtTYzB0dXVwdGxWVG9XSk1xYS9SRWlXNWFxZFlJVHhoVGZCcFFVRXZiZjFGVm5TVE5iTHRJV3J2RFdXaHNkaTVFQWdGZGNVNlBqMyt3VmxWMU9qOVRoYU83M21IdUJDWEVTVkpKaFg0OTBHSFQrMldxN2ZldlgvSnRRTWtKdXVJY1RSMGpTVHVxVkZvcFNlT0hPVnQzSGdydDJiNmNNN1RIWjJsbzFqcy9TZEl0M1F4Q0Y0MTBGamJ1NnZIQit3bmZYVVNYM2hOYVBseXZ6My9Ub2k5MHZFa0pjY3BJY2RaWDE0WHRjOHhaeUV5TDVIUnZiTllEa3pVdlYvZC8xc1hXRVcwdmk1VTFrUnk4UC9EcENCU1VuS2pCQXpYOEZFbEtTUXl0RDcrQURWNW9kOXJoeEcwL29FMjdsWnFrK1JkMHNUVTF5Vms0MWlSSjJSbHFYUnI2ODlyc1NNNFlZM3dYVVB1N3NDbXZhOCsvbWpwRzM5eXVpN05VM3hqYUp5SHNvMDZNZHhiQ2QraVJOelpMMHEwWGRiR3AvU29uMlhjamZSdmZCUlJVMTZodi85VGpYMHRTWEVDTHBxaXBKWFMzTUdOZ2FNOUJ5YzdDZ2FNUm5tdmxOdjE3WEhramxYdEc1MDEvdDcxeVpRMlNwTCtxRlNoU3hwSUlUeFNUZkJwUVVFV1ZzM0JlcGlUOXNzOTVHTHd0MUdtNWZIK0VaNmx0MElveXFhdEw2YzJWemtMQnFBZ1BIdk44SGRDSVV6bzgvT29QWjJIYVdHY2hNVjZUczUzbE5iOUhmcUxpVXFrdDAzQWYvdXhjYjAwL1MyY1BpZno0TWN5bkFTVW5LRytrRmwvcVBQeGh0eVF0TDNXbURoYm1hOXBZcFNacDZVem56ZGVxY3UwK0hQbnB0bFNxYkU4WDYvY2QwVXZmUzFKOG5GYmZwSUpSR3BDZzhUMi9YeEREZkhkeEYvNDJQdWhnclo1ZUowbjdqdWkyai9UdURScVlxTFczaG5iWVZhMTdWb2NlaGsybU9uS0dPajlMc0gweTlmK0tTN1ZzVmhmckgxbWpzWU4xYlk3T1BWMGI3K3F3cWRrUHN4bStDeWlvdVVWSEc3U2pTaVVWZW5GRGFLSjB4VmJ0T3F5SHA2cGd0TklINk84YXJkNnVKOWZwVUozcjRVN0FlMlY2L3NvdTdnVTBOT3U2ZDNWOXJoYmthZUp3RFVwUnpURnQyNnVQeTdXODFIcFNQd2plMGtBL1pmN3Y4K2sxRUhvTEFibmh1ekk4RVJCTUNBZ21CQVFUQW9JSkFjSEVwemNTbzRRZk1PV0pFUWdtQkFRVEFvSko3MTREZFRmdHdpODhqSXpMTkZadmZVb1pnZHd3bGVHSmdHQkNRREFoSUpnUUVFd0lDQ1pNWmJoaEtzTVRJeEJNQ0FnbUJBUVRBb0lKQWJsaEtzTVRBY0dFZ0dCQ1FEQWhJSmdRRUV5WXl1aXN0ZFh0SjhnSEFnR1hyU2NoUmlDWUVCQk1DQWdtQkFRVEFvSUpBY0dFZ0dCQ1FEQWhJSmh3SjdxejhIdk53UzhHNGt2clhSQ1FHOUx4eEVzWVRBZ0lKZ1FFRXdLQ0NRRzU0YnN5UEJFUVRBZ0lKZ1FFRXdLQ0NRSEJoS2tNTjB4bGVHSUVnZ2tCd1lTQVlFSkFNQ0VnTjB4bGVPcmRkMkg4VnA3b2lvSFBKeU1RVEFnSUpnUUVFd0tDQ1ZNWmJwaks4TVFJQkJNQ2dna0J3WVNBWUVKQWJwaks4RVJBTUNFZ21CQVFUQWdJSmdRRUU2WXkzRENWNFlrUkNDWUVCQk1DZ2drQndZU0EzRENWNFltQVlFSkFNQ0VnbUJBUVRBZ0lKa3hsdUdFcXd4TWpFRXdJQ0NZRUJCTUNnZ2tCdVdFcXd4TUJ3WVNBWUVKQU1DRWdtQkFRVEpqS2NNTlVoaWRHSUpnUUVFd0lDQ1lFQkJNQ2dna0J3WVNBWUVKQU1DRWdtQkFRVEFnSUpnUUVreWhOcHJZdWpjNXgwTjh3QWdFQUFBQUFBQUFBQUFBQUFBQUFBQUFBVGxyL0FVbm5lRUxTNzNzTkFBQUFBRWxGVGtTdVFtQ0MiLCAic2l6ZXMiOiAiMTkyeDE5MiIsICJ0eXBlIjogImltYWdlL3BuZyIsICJwdXJwb3NlIjogImFueSJ9LCB7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQWdBQUFBSUFDQUlBQUFCN0drT3RBQUFUbEVsRVFWUjRuTzNkZWJ5VmRaM0E4ZTlGTGlBZ0VJakxSVEVRRlVSTkpWeHVwcVhTcU1tWWFlTlVsbHBaMDc1WkwxdGUydUkwMm1hdm1uRnNrUmJMWHRrMFpaZzZvN2tVNnBpWWxndWlhT0JDc29Xc3N0LzVnOHA3TDg5ejc3bm5uc3U1bCsvNy9aZm5PYzk1K01sTHorYzgyKytKQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFDZ04ydW85d0FxMW5KcHZVY0FVTEdHQytzOWdzNzFxL2NBQUtnUEFRQklTZ0FBa2hJQWdLUUVBQ0NwL3ZVZVFEZjBoWlBzUUFwOTh6SkZld0FBU1FrQVFGSUNBSkNVQUFBa0pRQUFTUWtBUUZJQ0FKQ1VBQUFrSlFBQVNRa0FRRklDQUpDVUFBQWtKUUFBU1FrQVFGSUNBSkNVQUFBa0pRQUFTZlhsSjRKQk56Uk5iMjc5Y3VITXUrbzFFcWdYZXdBQVNRa0FRRklDQUpDVUFBQWtKUUFBU1FrQVFGSUNBSkNVQUFBa0pRQUFTUWtBUUZJQ0FKQ1VBQUFrSlFBQVNRa0FRRkttZ3lZcDh6K0RQUUNBcEFRQUlDa0JBRWhLQUFDU0VnQ0FwQVFBSUNrQkFFaEtBQUNTRWdDQXBBUUFJQ2tCQUVoS0FBQ1NFZ0NBcEFRQUlDblRRWk5VMC9UbTFpL05EazFDOWdBQWtoSUFnS1FFQUNBcEFRQklTZ0FBa2hJQWdLUUVBQ0FwQVFCSVNnQUFrbkluTUwzRDhFRngyb0V4YmI4NGVJOFlPeUoyR1JpYnRzU0tkVEZ2V2R6M1ROd3dOMjUrUExhMDFIdVV2Yy9oWStLRWZlT29zVEZoVkl3WkhrTUhSRVFzWFJ2UHJZcDdub283L2hRM3pZMlY2K3M5U25xcGhub1BvR0l0bDdaZjBuQmhQY2F4US92MzArSzlSM2UrV2t0THJOa1lLOWZGeXZVeGIyazgrRnpjOTJ6YzlGaXMyVkROSHpwOFVGeDBRcnp6eUw5K2VaV1p2end1dVRWbXpJNld5akp3NnFTWWVVNDE0OWxXNHlkajA1YUM1YmUvTTQ0Ylg3QjhTMHVNdXl5ZWVyNmpiVjUvYnJ4Mll2dUY3LzU1WEhsUFJVTWFzRk84NDRoNGYzTk1ITjNKbW1zMnhJLy9FRitiRlE4dnFtakxWS2R2ZmtIWkE2RHJHaHBpNklBWU9pQ2FJaWFPamxNblJVU3MyUkRYUFJLWDNCcHpGbmRoVTgzN3hFL2ZIRTNET2wvenBTK0o3NXdSWng4V1oxMFRpMWRYT2ZMdG8xOURuRHNsUHZmcm50citjZU5qeHBreGZtUkZLdzhaRU8rWUd1ZE9pU3Z1am90dWpoWHJlbXBVOUVIT0FWQWpRd2JFbXc2TlAzd3dManM1ZHFyc3Y2dVRENGpiM2xuUnQvL2Z2V3A4M1AyZUdOT1ZqOVRGdVZPaW9XZDJyejkyYk54NmZxWGYvbi9YdjE5ODRCVngvaEU5TWlUNkxBR2dwaHAzaW84ZkZ6OStZL1R2N0QrdGwrMFpQenM3QnV6VTVUOWkvTWk0NmUweHVMRzZBVzRuNDBiR3E0cU9EblhUSmErSkw1NFMvZnJPa1Z0Nk53R2dCN3poNFBqQ1NSMnRNS2gvWFB2bTJMbmFML0dEZG8vTHAxZjUyZTNtYlMrdjhRYmZQalUrZFh5TnQwbHVBa0RQK05Bcll0SnVwZTllY0d6c3YydTN0bi8rMUppNlY3ZTIwTlBPT0NpR0RheloxZzRZSGQvNHg1cHREU0pDQU9ncGpUdkZ1NDRzZm12WXdMamcyTklQL3ZLUk9PWS9ZL2pGMGZTdmNkWTFwYWVVR3hyaU05TnFNTTZlczNOanZQSFFtbTN0aXRkMXRNTzBla044Nzc0NGFVYU0vMklNK25RTXV6Z092anplL2ZPNGMwSE5Cc0NPeUZWQVZPRG9LK0wvbm5yeFpVTkRER21NdlVmRUsvYUo5emZISVhzV2YycjZwUGpReklMbGI1c2F3d2NWZitUeVdmR1I2Ly82enl2WHg3Vi9qSnZteGkzbkYvL1lQM24vbURnNkhsMVN2S25yNXhSZmgzZlE3dkhnaHd1V1A3c3k5dnBDOGFhcWR0N0w0NXVWWGRiWnNaUDJqK1AzTFgxMzF2dzQreWV4WVBtTFM5WnZpb2NXeFVPTDRzcDc0dmg5NDV1dmp3bWphakFNZGpqMkFPaTZscFpZdlNIbUxJN3YzQnRUdmhHL2VyUjR0ZkVqWStUZ2d1VnZQYng0L1FlZml3dCsxWDdoeXZYeHBoL0h4czBGNnpjMHhGdEtOdFZMSExsM0hGaCtIS3h5SHkzZllicnRpWGoxdDlwOCs3ZHo2eE54K05mamhyazFHQVk3SEFHZ2V6WnRpZmRkVi9ydTdrUGJMeGsvTWc1cktsNzVNN2NVMytzN2IxbDgvL2ZGSHpuejRFckdXRTl2bTlyZExldzdLazZjVVB6V3dwWHhoaDhWMzZUVzJxcjFjZm9QNG44ZjcrNUkyT0VJQU4wMmYzazgrWmZpdDE2eWMvc2wwL1lyWG5QRnVwZzVwL1NQK09IOXhjdjMzelhHanVoc2ZIWDFsc002dnlLMlk2K2ZYUHJXdjkwZXk5Wld0SkVObStPc2ErS0paZDBhQ1RzY0FhQVdscTRwWHI1Nm04a2hqbmxwOFpxM1AxbDhuR2VydXhiRTJvM0ZiNzF5WEdlRDI3N2FIWTNaYldqQmxBOWRzdlZHNjIwdFdSUGYrVjBYdHZQOEMvSHpoN3MxRW5ZNEFrQXRqTmptbC81V2YxN1pmc25oWTRyWG5QMU1SOXZmdURrZVdGajgxcUVscDZEclpkdWpWZDI1SVdEQVRuSEUzc1Z2L2VyUldMZXAraTJEQUZBRGUrNFMreFZkWkRKL2VTeHB1MmZRdjE4Y1VITDUveU9kelNCVXRzSkJlM1E2d08zcThhVXhhMzZiSmFkTUxEZ1hVcUZEOW94QkpaZnEzZWk4THQwbEFIUlBRME44K2JYRjg5NXNlOEJoN0lqU2FZTG1sMS9IMHZFSzQxN1N5UWUzdjZ2dWJmT3lmNy9xcjFicVlMTFBPK2RYdVUzNEd3R2dLb01iWThLb2VQTmhNZXRmNGsySEZxend3c2I0K3AzdEYrNDlvblNEMng0c3FuQ0ZmWHBmQUg3NllLeHFPd1YvMVVlQnl1NlhYcnN4RnE2cWNwdndOMjRFb3dKM3Y2ZkxIL25JOVFXLzJVY1BLVjIvMDZ0WnlsWVkxRCtHREtqeVVRUTlaTTJHdVBhUDhmWldGNEJPMmkyT0d0dm1acm9LN1ZreTcrbThwWlUrRndISzJRT2cxalp1anZkZFYveGdrNUVsNTRyWGI0b041WmNBYmJXcS9MRldaWnV0b3htejJ5K3BiaWVnTEpsKy9sTUxBa0R0ckZnWDM3OHZKbDhlLzNGMzhRcERTcDc1VlhhSlo0WHJsRzIyanU1YTBINFdvN05lVnMwVTFtVnpadlNxUFI3NkxJZUFxSVVsYStJWEQ4ZlY5OGVzK1IwZG1paWIvYi9UZTFrak9ycExvTEhyRHhYWURyNDdPNzU0eW9zdmh3Mk1NdzZPcTB0dWFTNVQ5amUydGlnQS8zVjJuSEZRSnh0Y3REcjJ1S1JyWTJESFpRK0FXaGc5Sk00L0luN3pybmo2RTNISmEyS1hrbW1RKzVkOG5WWHl0UGNPMXVtZEFmakI3OXVIcllxalFHWC9hdTRBb0JZRWdKb2FNeXcrZFh6TSsxaTh1bWoyeWswbHYrSXJlY1JWQit0VXNnT3gvUzFhSFRlMG5TYnZ1SEZkZnBSajJYNVAyYzBCMEJVQ1FBL1liV2pjZUY2Y2ZFRDc1V1ZuZWl1WkxhZURuL2tiZXV2UDRhdmFuZ3B1YUloenAzUnRDMlYvWTRONzMya1AraUMvSTZoQTRmTUFSZzJKeWJ2RnFaUGluQ2tGcHpjSDlvK3J6NHFETDQ4L3Q3cGVwZXpVWlNWblJ6dFlwOWVlRWIzaDBYaHVWZXl4eTR0THpwbFNPdWxwb1JYcmlwZjN3dlBlOUVIMkFPaTZyYzhEV0xBOGJwZ2I3L2xGSFBqVmVIeHB3V3FqQnNlbjJ6N0RkdmtMeFJzYzJML3pwOE9YblZlSWlMK1ViTGJ1Tm0ySnE5dk9ZenAyUk9uY3pvV1dsTXl5TjZiay9nRG9DZ0dnMnhZc2ozKzZwdmppbjdkT2FmUEZYZloxRmxIODZKaldScFdzc0c1VDc5MERpRzJtaFlpSTg3cHlLbmhoeWYzUCszckNGelhnRUJDMThNREN1T2ZwT0dwcysrVkRCOFRSWTE5OEZNbFR6NWR1b1dsWVBOZmh6VTFsOThSMnNNM2VZTzZTdUd0Qk5PL3o0cExYVFM1NFRFS1p4NHAyclNKaWNHT01HUmJQdHMzRG1UOXM4M0xpNkpqejBjcEhTa0wyQUtpUnN2bWNqMnhWaGFkWHhPYVNLM1plMnRtVVBtVXIvS25rV1RTOVI3dTdnZ2YxTDU0OXFkQ2M4a2xTZTl1REVPaURCSUFhS1RzUTM5VHFsL3ZHelRHMzVDZnRwTTZlblZ1MndrT0xPaDFhbmYza0QrMFBVbFYrUThDRHo4VUxKYmRBLzhQKzNSb1ZDQUExVTNaZFNydkRIZmMvVzd6YTFMMDYybmovZnFVUGZybS81RUV4dmNmcURYSHRIOXNzT1h4TUhMUjdSWi9kdUxsMENyblhUblEzQU4wa0FOUkkyWk5lMnQzSzlOdjV4YXNkTjY2anV3R08zcWMwTUwvOVV3V0RxN2R0NTRhcmZCYnI2eDh0WGo1NlNKZnZLb0MyQklCYTJHMW9IRjl5ZFdPN0szOXVtVmU4Mm9pZFN4OStHeEZuSDFhOC9MR2x2ZjBrOEZhejVwZWV6dTNVZno5VU9yM1NKMTVkK2pCT3FJQUEwRzA3TjhiMzNsQjZvMWE3QjdrOHNhejA2YjZmUGJGNHZvZDlSOFY1SlQ5MWYvWmc1Y09zcys5dXN4TlFvZm5MNDM4ZUwzNXI3SWlZY1dieDQ5aWdBZ0pBVlhadWpLWmhjZXk0dVBqRW1IdEJ3YXdQZjNmSE5vZG9mbEF5SStZaGU4WmxKN2RmdU12QStORS9sODREMGU0MnE5N3MrL2VWWGdIVnFhLzhwdlN0MHlmSHo4N3U2QzQ1S09ja0VoV280b2xnV3kxWlUzQjU2RlgzeG1lbXhiQ2k3NndMam8zOWRvM0xibytIRnNYZ3huamx1UGpzdERpdzVQcWZHK2QyZEpYa3FaTmk1amxkR09xWVlkRnlhZkZialorc3dYeHpmMTRWTjg3dDZEQlhCMjZaRjdmTUs3MkYrUFRKY2RRRjhlM2Z4WFdQeElMbHNXSmQ3RG9rcHU0Vkh6cW1PK01sQXdHZ0oxMCtxMkRlbTVYcjQ4dS9pYzlOSy83SWFRZkdhUWQydnVXV2xyajQ1dTRPYnp1Yk1idktBRVRFZTM4UjkzK3c5RGpibnJ2RVJTZkVSU2RVUFRSeWNnaUlIdlBFc3ZqcWI0dmYrdElkMVo4VTNlcmI5OGE5SmJlZTlWclhQeHFMVjFmNTJjZVd4Z2QrV2RQUmdBRFFRNTVlRVNmTmlQVWxFeld2MnhSblhWUDlVMDBlWGhRZm5sbjEwT3BtNCtadW5iUzQ2dDY0OVBhYURRWUVnQjV4MTRKNDVaVXhiMWxINnp5d01GNS9kZWZQZ3QvV2szK0prMlpVOUJqaFhtakdOblBEZGNrbmJvcUxidTdvb1pzZFc3aytQbjVEdHdiQWprVUFxSjB0TGZIcmVYSDYxWEhNbGJGZ2VlZnIzemczanY5V213Y0dkT3FPSitQb0srS1pGVldQc2M0ZVdSejNQTjJ0TFh6KzEzSEtkMHRuQ2UzQUxmUGlrSytWWG9KRlNrNENVNVZOVzJMOXBsaXhMaGF2amdYUHg1ekZNZnVadVAzSldMYTJhOXU1YzBGTStrcGNkRUs4NjhoT0huS3lZSGxjY212TW1OMkZwNm4wVGxmZEcwZnUzYTB0M1BSWTdQZWxlSDl6dkxjNTloN2V5Y3BiV3VLNlIrSkxkOFRkSlZOS2tGamZ1WVZrMjB2MEdpNnN4empvR2NNSHhlc214N1FKY2ZBZU1YWkVEQjBZbTdmRWluVXhiMW5NZmladW5CczN6NnYrT3ZvZFZiK0dPSFpjbkRnaFhyNVhUQmdWdXcyTndZMnhkbU1zV1JOTDFzUURDK08ySitLMko2cy84MHpsK3VZWGxBQUFkRnZmL0lKeURnQWdLUUVBU0VvQUFKSVNBSUNrQkFBZ0tRRUFTTXFOWUNUVk5MMjU5Y3VGTSsrcTEwaWdYdXdCQUNRbEFBQkpDUUJBVWdJQWtKUUFBQ1FsQUFCSkNRQkFVZ0lBa0pRQUFDUWxBQUJKQ1FCQVVnSUFrSlFBQUNRbEFBQkptUTZhcE16L0RQWUFBSklTQUlDa0JBQWdLUUVBU0VvQUFKSVNBSUNrQkFBZ0tRRUFTRW9BQUpJU0FJQ2tUQVhSbVpaTHUvWHhoZ3RyTkE3SXl2K0RQY1llQUVCU0FnQ1FsQUFBSk9VY0FFazFUVzl1L2RMczBDUmtEd0FnS1FFQVNFb0FBSklTQUlDa0JBQWdLUUVBU0VvQUFKSVNBSUNrQkFBZ0tRRUFTRW9BQUpJU0FJQ2tCQUFnS1FFQVNNcDAwQ1JsL21ld0J3Q1FsQUFBSkNVQUFFa0pBRUJTQWdDUWxBQUFKQ1VBQUVrSkFFQlNBZ0NRbEFBQUpDVUFBRWtKQUVCU0FnQ1FsQUFBSkdVNmFKSnFtdDdjK3FYWm9VbklIZ0JBVWdJQWtKUUFBQ1FsQUFCSkNRQkFVZ0lBa0pRQUFDUWxBQUJKQ1FCQVVnSUFrSlFBQUNRbEFBQkpDUUJBVW1ZRFpZZlYwdEpTcTAwMU5EVFVhbFBRZTlnREFFaEtBQUNTRWdDQXBBUUFJQ2tCQUVoS0FBQ1NFZ0NBcEFRQUlDa0JBRWhLQUFDU0VnQ0FwQVFBSUNrQkFFaEtBQUNTRWdDQXBBUUFJQ2tCQUVoS0FBQ1NFZ0NBcEFRQUlDa0JBRWhLQUFDU0VnQ0FwQVFBSUtuKzlSNEE5SlNHaG9ZTzNtMmEzdHo2NWNLWmQvWHdjS0RYc1FjQWtKUUFBQ1FsQUFCSkNRQkFVZ0lBa0pTcmdFaktaVDlnRHdBZ0tRRUFTRW9BQUpJU0FJQ2tCQUFnS1FFQVNFb0FBSklTQUlDa0JBQWdLUUVBU0VvQUFKSVNBSUNrQkFBZ0tRRUFTTXAwMENUbG9mQmdEd0FnS1FFQVNFb0FBSklTQUlDa0JBQWdLUUVBU0VvQUFKSVNBSUNrQkFBZ0tRRUFTRW9BQUpJU0FJQ2tCQUFnS1FFQVNNcDAwQ1JsL21ld0J3Q1FsQUFBSkNVQUFFa0pBRUJTQWdDUWxBQUFKQ1VBQUVrSkFFQlNBZ0NRbEFBQUpDVUFBRW1aQzZnekRSZldld1NRbS84SGU0dzlBSUNrQkFBZ0tZZUFTS3BwZW5QcmwyYUhKaUY3QUFCSkNRQkFVZ0lBa0pRQUFDUWxBQUJKQ1FCQVVnSUFrSlFBQUNRbEFBQkpDUUJBVWdJQWtKUUFBQ1FsQUFCSkNRQkFVcWFESmluelA0TTlBSUNrQkFBZ0tRRUFTRW9BQUpJU0FJQ2tCQUFnS1FFQVNFb0FBSklTQUlDa0JBQWdLUUVBU0VvQUFKSVNBSUNrQkFBZ0tkTkJrMVRUOU9iV0w4ME9UVUwyQUFDU0VnQ0FwQVFBSUNrQkFFaEtBQUNTRWdDQXBBUUFJQ2tCQUVoS0FBQ1NFZ0NBcEFRQUlDa0JBRWhLQUFDU0VnQ0FwRXdIVFZMbWZ3WjdBQUJKQ1FCQVVnSUFrSlFBQUNRbEFBQkpDUUJBVWdJQWtKUUFBQ1FsQUFCSkNRQkFVZ0lBa0pRQUFDUWxBQUJKQ1FCQVVxYURKcW1tNmMydFg1b2Rtb1RzQVFBa0pRQUFTUWtBUUZJQ0FKQ1VBQUFrSlFBQVNRa0FRRklDQUpDVUFBQWtKUUFBU1FrQVFGSUNBSkNVQUFBa0pRQUFTWmtPbXFUTS93ejJBQUNTRWdDQXBBUUFJQ2tCQUVoS0FBQ1NFZ0NBcEFRQUlDa0JBRWhLQUFDU0VnQ0FwQVFBSUNrQkFFaEtBQUNTRWdDQXBFd0hUVkpOMDV0YnZ6UTdOQW5aQXdCSVNnQUFraElBZ0tRRUFDQXBBUUJJU2dBQWtoSUFnS1FFQUNBcEFRQklTZ0FBa2hJQWdLUUVBQ0FwQVFCSVNnQUFraklkTkVtWi94bnNBUUFrSlFBQVNRa0FRRklDQUpDVUFBQWtKUUFBU1FrQVFGSUNBSkNVQUFBa0pRQUFTUWtBUUZJQ0FKQ1VBQUFrSlFBQVNRa0FRRklDQUpDVUFBQWtKUUFBU1FrQVFGSUNBSkNVQUFBa0pRQUFTUWtBUUZJQ0FKQ1VBQUFrMWIvZUEraUdsa3ZyUFFLQVBzd2VBRUJTQWdDUWxBQUFKQ1VBQUVrSkFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQkE3L2IvTEFXSHhSZFY2QW9BQUFBQVNVVk9SSzVDWUlJPSIsICJzaXplcyI6ICI1MTJ4NTEyIiwgInR5cGUiOiAiaW1hZ2UvcG5nIiwgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIn1dfQ==">
+<meta name="theme-color" content="#00ff88">
+<meta name="description" content="A Pong-style arcade game.">
+
+<!-- iOS-specific -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Boing">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { height: 100%; width: 100%; }
@@ -19,8 +32,6 @@
     user-select: none;
     -webkit-user-select: none;
   }
-
-  /* Title only on desktop / when there's room */
   h1 {
     font-size: 2.5rem;
     letter-spacing: 0.5rem;
@@ -28,8 +39,6 @@
     color: #00ff88;
     text-shadow: 0 0 20px #00ff88;
   }
-
-  /* Menu overlay */
   #menu {
     position: fixed;
     inset: 0;
@@ -66,6 +75,12 @@
     color: #000;
     box-shadow: 0 0 20px #00ff88;
   }
+  .btn.small {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    min-width: 0;
+    letter-spacing: 0.15rem;
+  }
   .hint {
     color: #666;
     font-size: 0.8rem;
@@ -73,7 +88,6 @@
     text-align: center;
     line-height: 1.6;
   }
-
   canvas {
     background: #000;
     border: 2px solid #00ff88;
@@ -82,7 +96,6 @@
     outline: none;
     touch-action: none;
   }
-
   .info {
     margin-top: 0.75rem;
     text-align: center;
@@ -92,12 +105,65 @@
   }
   .info strong { color: #00ff88; }
 
-  /* Hide title and info on small screens to maximize playfield */
   @media (max-width: 600px), (max-height: 600px) {
     h1 { display: none; }
     .info { display: none; }
     body { padding: 0; }
     canvas { border-width: 0; box-shadow: none; }
+  }
+
+  /* Add-to-home-screen modal */
+  #installModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    padding: 1rem;
+  }
+  #installModal.show { display: flex; }
+  .modal-box {
+    background: #0a0a0a;
+    border: 2px solid #00ff88;
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+    max-width: 460px;
+    width: 100%;
+    padding: 1.5rem;
+    color: #ddd;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal-box h3 {
+    color: #00ff88;
+    letter-spacing: 0.25rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.15rem;
+  }
+  .modal-box ol { padding-left: 1.2rem; margin: 0.75rem 0; }
+  .modal-box li { margin-bottom: 0.5rem; }
+  .modal-box .platform { color: #888; font-size: 0.8rem; margin-top: 1rem; text-transform: uppercase; letter-spacing: 0.15rem; }
+  .modal-close {
+    background: transparent;
+    color: #00ff88;
+    border: 2px solid #00ff88;
+    padding: 0.5rem 1rem;
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    width: 100%;
+    letter-spacing: 0.15rem;
+  }
+  .modal-close:hover, .modal-close:active { background: #00ff88; color: #000; }
+  .menu-buttons-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: center;
   }
 </style>
 </head>
@@ -111,9 +177,20 @@
 
   <div id="menu">
     <h2>BOING</h2>
-    <button class="btn" id="btn1p">1 PLAYER vs CPU</button>
-    <button class="btn" id="btn2p">2 PLAYERS</button>
+    <div class="menu-buttons-row">
+      <button class="btn" id="btn1p">1 PLAYER vs CPU</button>
+      <button class="btn" id="btn2p">2 PLAYERS</button>
+      <button class="btn small" id="btnInstall">📱 ADD TO HOME SCREEN</button>
+    </div>
     <div class="hint" id="orientationHint"></div>
+  </div>
+
+  <div id="installModal">
+    <div class="modal-box">
+      <h3>ADD TO HOME SCREEN</h3>
+      <div id="installInstructions"></div>
+      <button class="modal-close" id="closeInstall">GOT IT</button>
+    </div>
   </div>
 
 <script>
@@ -123,48 +200,28 @@ const ctx = canvas.getContext('2d');
 const menu = document.getElementById('menu');
 const orientationHint = document.getElementById('orientationHint');
 
-// ---------- State ----------
-let mode = null;              // '1p' or '2p'
-let isPortrait = false;       // true => vertical playfield (paddles at top & bottom)
-let W = 800, H = 500;         // canvas pixel dims
-
+let mode = null;
+let isPortrait = false;
+let W = 800, H = 500;
 const WIN_SCORE = 7;
-
 const paddle = { thick: 12, len: 90, speed: 7 };
-
-// p1 = "left" in landscape / "bottom" in portrait (you, the local user)
-// p2 = "right" in landscape / "top" in portrait (CPU in 1p, second human in 2p)
 const p1 = { pos: 0, score: 0 };
 const p2 = { pos: 0, score: 0 };
-
-const ball = {
-  x: 0, y: 0,
-  size: 12,
-  vx: 0, vy: 0,
-  speed: 5,
-  live: false
-};
-
+const ball = { x: 0, y: 0, size: 12, vx: 0, vy: 0, speed: 5, live: false };
 let gameOver = false;
 let messageText = '';
 let messageTimer = 0;
-
-// Input
 const keys = {};
-let p1Touch = null;   // {pos} — used by mobile drag for player 1
-let p2Touch = null;   // mobile drag for player 2
+let p1Touch = null, p2Touch = null;
 let mouseActive = false;
-let mousePos = 0;     // along the paddle's movement axis
+let mousePos = 0;
 
-// ---------- Layout ----------
 function resize() {
   const margin = (window.innerWidth < 600 || window.innerHeight < 600) ? 0 : 40;
   const titleSpace = (window.innerWidth < 600 || window.innerHeight < 600) ? 0 : 160;
   const availW = window.innerWidth - margin;
   const availH = window.innerHeight - titleSpace;
-
   isPortrait = availH > availW;
-
   if (isPortrait) {
     W = Math.min(availW, 600);
     H = Math.min(availH, W * 1.6);
@@ -176,13 +233,9 @@ function resize() {
   canvas.height = H;
   canvas.style.width = W + 'px';
   canvas.style.height = H + 'px';
-
-  // Recenter paddles on the axis they slide along
   const axisLen = isPortrait ? W : H;
   p1.pos = axisLen/2 - paddle.len/2;
   p2.pos = axisLen/2 - paddle.len/2;
-
-  // Recenter ball if not in play
   if (!ball.live) {
     ball.x = W/2 - ball.size/2;
     ball.y = H/2 - ball.size/2;
@@ -191,31 +244,23 @@ function resize() {
 window.addEventListener('resize', resize);
 window.addEventListener('orientationchange', resize);
 
-// ---------- Paddle geometry helpers ----------
-// Returns paddle bounding rect for a player given their slide position.
 function paddleRect(player, which) {
-  // which: 'p1' or 'p2'
   if (isPortrait) {
-    // paddles horizontal, slide along x. p1 = bottom, p2 = top.
     const y = which === 'p1' ? H - 20 - paddle.thick : 20;
     return { x: player.pos, y, w: paddle.len, h: paddle.thick };
   } else {
-    // paddles vertical, slide along y. p1 = left, p2 = right.
     const x = which === 'p1' ? 20 : W - 20 - paddle.thick;
     return { x, y: player.pos, w: paddle.thick, h: paddle.len };
   }
 }
 
-// ---------- Serve / Reset ----------
-function serve(towardP1) {
+function serve() {
   ball.x = W/2 - ball.size/2;
   ball.y = H/2 - ball.size/2;
-  const angle = (Math.random() * 0.5 - 0.25) * Math.PI; // ±45°
-  const dir = (towardP1 === undefined ? (Math.random() < 0.5) : towardP1) ? -1 : 1;
+  const angle = (Math.random() * 0.5 - 0.25) * Math.PI;
+  const dir = Math.random() < 0.5 ? -1 : 1;
   ball.speed = 5;
   if (isPortrait) {
-    // ball travels primarily vertically. p1 is bottom (positive y), p2 is top.
-    // dir = -1 means toward p2 (up), +1 means toward p1 (down)
     ball.vy = Math.cos(angle) * ball.speed * dir;
     ball.vx = Math.sin(angle) * ball.speed;
   } else {
@@ -226,8 +271,7 @@ function serve(towardP1) {
 }
 
 function resetGame() {
-  p1.score = 0;
-  p2.score = 0;
+  p1.score = 0; p2.score = 0;
   gameOver = false;
   ball.live = false;
   ball.x = W/2 - ball.size/2;
@@ -237,33 +281,28 @@ function resetGame() {
 
 function showMessage(t) { messageText = t; messageTimer = 90; }
 
-// ---------- Bounce ----------
 function bounceOff(player, which) {
   const r = paddleRect(player, which);
   if (isPortrait) {
-    // ball travels in y, paddle is horizontal — angle based on x offset
     const center = r.x + r.w/2;
     const offset = (ball.x + ball.size/2 - center) / (r.w/2);
-    const maxAngle = Math.PI / 3;
-    const angle = Math.max(-1, Math.min(1, offset)) * maxAngle;
-    const dir = ball.vy < 0 ? 1 : -1; // flip direction
+    const angle = Math.max(-1, Math.min(1, offset)) * (Math.PI / 3);
+    const dir = ball.vy < 0 ? 1 : -1;
     ball.speed = Math.min(ball.speed + 0.3, 13);
     ball.vy = Math.cos(angle) * ball.speed * dir;
     ball.vx = Math.sin(angle) * ball.speed;
-    // nudge out
     if (dir === 1) ball.y = r.y + r.h;
-    else           ball.y = r.y - ball.size;
+    else ball.y = r.y - ball.size;
   } else {
     const center = r.y + r.h/2;
     const offset = (ball.y + ball.size/2 - center) / (r.h/2);
-    const maxAngle = Math.PI / 3;
-    const angle = Math.max(-1, Math.min(1, offset)) * maxAngle;
+    const angle = Math.max(-1, Math.min(1, offset)) * (Math.PI / 3);
     const dir = ball.vx < 0 ? 1 : -1;
     ball.speed = Math.min(ball.speed + 0.3, 13);
     ball.vx = Math.cos(angle) * ball.speed * dir;
     ball.vy = Math.sin(angle) * ball.speed;
     if (dir === 1) ball.x = r.x + r.w;
-    else           ball.x = r.x - ball.size;
+    else ball.x = r.x - ball.size;
   }
 }
 
@@ -272,11 +311,8 @@ function rectsOverlap(a, b) {
          a.y < b.y + b.h && a.y + a.h > b.y;
 }
 
-// ---------- Update ----------
 function update() {
   const axisLen = isPortrait ? W : H;
-
-  // P1 input (you)
   let p1Target = null;
   if (p1Touch !== null) p1Target = p1Touch - paddle.len/2;
   else if (mouseActive && mode === '1p') p1Target = mousePos - paddle.len/2;
@@ -284,38 +320,30 @@ function update() {
   if (p1Target !== null) {
     p1.pos = p1Target;
   } else {
-    // Keyboard. In 2p: P1 uses arrows. In 1p: P1 uses W/S OR arrows.
     if (mode === '1p') {
       if (keys['w'] || keys['arrowup'] || keys['arrowleft']) p1.pos -= paddle.speed;
       if (keys['s'] || keys['arrowdown'] || keys['arrowright']) p1.pos += paddle.speed;
     } else {
-      // 2p: bottom/left player = arrow keys
       if (isPortrait) {
-        if (keys['arrowleft'])  p1.pos -= paddle.speed;
+        if (keys['arrowleft']) p1.pos -= paddle.speed;
         if (keys['arrowright']) p1.pos += paddle.speed;
       } else {
-        if (keys['arrowup'])   p1.pos -= paddle.speed;
+        if (keys['arrowup']) p1.pos -= paddle.speed;
         if (keys['arrowdown']) p1.pos += paddle.speed;
       }
     }
   }
   p1.pos = Math.max(0, Math.min(axisLen - paddle.len, p1.pos));
 
-  // P2 input — CPU in 1p, second human in 2p
   if (mode === '1p') {
-    // CPU AI follows ball with cap
     const r = paddleRect(p2, 'p2');
     const center = isPortrait ? (r.x + r.w/2) : (r.y + r.h/2);
     const target = isPortrait ? (ball.x + ball.size/2) : (ball.y + ball.size/2);
     const diff = target - center;
-    const cpuSpeed = 5;
-    if (Math.abs(diff) > 6) p2.pos += Math.sign(diff) * cpuSpeed;
+    if (Math.abs(diff) > 6) p2.pos += Math.sign(diff) * 5;
   } else {
-    // Human 2: top/right player
-    let p2Target = null;
-    if (p2Touch !== null) p2Target = p2Touch - paddle.len/2;
-    if (p2Target !== null) {
-      p2.pos = p2Target;
+    if (p2Touch !== null) {
+      p2.pos = p2Touch - paddle.len/2;
     } else {
       if (isPortrait) {
         if (keys['a']) p2.pos -= paddle.speed;
@@ -334,20 +362,18 @@ function update() {
   ball.x += ball.vx;
   ball.y += ball.vy;
 
-  // Wall bounces on the cross-axis
   if (isPortrait) {
-    if (ball.x <= 0)            { ball.x = 0; ball.vx *= -1; }
-    if (ball.x + ball.size >= W){ ball.x = W - ball.size; ball.vx *= -1; }
+    if (ball.x <= 0) { ball.x = 0; ball.vx *= -1; }
+    if (ball.x + ball.size >= W) { ball.x = W - ball.size; ball.vx *= -1; }
   } else {
-    if (ball.y <= 0)            { ball.y = 0; ball.vy *= -1; }
-    if (ball.y + ball.size >= H){ ball.y = H - ball.size; ball.vy *= -1; }
+    if (ball.y <= 0) { ball.y = 0; ball.vy *= -1; }
+    if (ball.y + ball.size >= H) { ball.y = H - ball.size; ball.vy *= -1; }
   }
 
   const ballRect = { x: ball.x, y: ball.y, w: ball.size, h: ball.size };
   const r1 = paddleRect(p1, 'p1');
   const r2 = paddleRect(p2, 'p2');
 
-  // Paddle collisions, only when traveling toward that paddle
   if (isPortrait) {
     if (ball.vy > 0 && rectsOverlap(ballRect, r1)) bounceOff(p1, 'p1');
     else if (ball.vy < 0 && rectsOverlap(ballRect, r2)) bounceOff(p2, 'p2');
@@ -356,13 +382,12 @@ function update() {
     else if (ball.vx > 0 && rectsOverlap(ballRect, r2)) bounceOff(p2, 'p2');
   }
 
-  // Scoring
   if (isPortrait) {
     if (ball.y + ball.size < 0) { p1.score++; showMessage(mode === '1p' ? 'You score!' : 'Bottom scores'); endRally(); }
-    else if (ball.y > H)        { p2.score++; showMessage(mode === '1p' ? 'CPU scores'  : 'Top scores'); endRally(); }
+    else if (ball.y > H) { p2.score++; showMessage(mode === '1p' ? 'CPU scores' : 'Top scores'); endRally(); }
   } else {
-    if (ball.x + ball.size < 0) { p2.score++; showMessage(mode === '1p' ? 'CPU scores'  : 'Right scores'); endRally(); }
-    else if (ball.x > W)        { p1.score++; showMessage(mode === '1p' ? 'You score!' : 'Left scores'); endRally(); }
+    if (ball.x + ball.size < 0) { p2.score++; showMessage(mode === '1p' ? 'CPU scores' : 'Right scores'); endRally(); }
+    else if (ball.x > W) { p1.score++; showMessage(mode === '1p' ? 'You score!' : 'Left scores'); endRally(); }
   }
 }
 
@@ -374,38 +399,29 @@ function endRally() {
   if (p1.score >= WIN_SCORE || p2.score >= WIN_SCORE) gameOver = true;
 }
 
-// ---------- Draw ----------
 function draw() {
   ctx.fillStyle = '#000';
   ctx.fillRect(0, 0, W, H);
-
-  // Center line
   ctx.strokeStyle = '#1a4d3a';
   ctx.lineWidth = 2;
   ctx.setLineDash([10, 12]);
   ctx.beginPath();
   if (isPortrait) { ctx.moveTo(0, H/2); ctx.lineTo(W, H/2); }
-  else            { ctx.moveTo(W/2, 0); ctx.lineTo(W/2, H); }
+  else { ctx.moveTo(W/2, 0); ctx.lineTo(W/2, H); }
   ctx.stroke();
   ctx.setLineDash([]);
 
-  // Scores
   ctx.fillStyle = '#00ff88';
   ctx.font = `bold ${Math.floor(Math.min(W,H)*0.12)}px Courier New`;
   ctx.textAlign = 'center';
   if (isPortrait) {
-    ctx.save();
-    // top score (p2)
     ctx.fillText(p2.score, W*0.25, H/2 - 20);
-    // bottom score (p1)
     ctx.fillText(p1.score, W*0.75, H/2 + 60);
-    ctx.restore();
   } else {
     ctx.fillText(p1.score, W/2 - 80, 80);
     ctx.fillText(p2.score, W/2 + 80, 80);
   }
 
-  // Paddles
   ctx.fillStyle = '#00ff88';
   ctx.shadowColor = '#00ff88';
   ctx.shadowBlur = 12;
@@ -414,27 +430,24 @@ function draw() {
   ctx.fillRect(r1.x, r1.y, r1.w, r1.h);
   ctx.fillRect(r2.x, r2.y, r2.w, r2.h);
 
-  // Ball
   ctx.fillStyle = '#fff';
   ctx.shadowColor = '#fff';
   ctx.shadowBlur = 18;
   ctx.fillRect(ball.x, ball.y, ball.size, ball.size);
   ctx.shadowBlur = 0;
 
-  // Transient message
   if (messageTimer > 0) {
     ctx.fillStyle = '#00ff88';
     ctx.font = `${Math.floor(Math.min(W,H)*0.04)}px Courier New`;
     ctx.fillText(messageText, W/2, H*0.15);
   }
 
-  // Overlay prompts
   if (gameOver) {
-    const youWin = mode === '1p' ? p1.score >= WIN_SCORE : null;
     let winner;
-    if (mode === '1p') winner = p1.score >= WIN_SCORE ? 'YOU WIN!' : 'CPU WINS';
-    else if (isPortrait) winner = p1.score >= WIN_SCORE ? 'BOTTOM WINS!' : 'TOP WINS!';
-    else winner = p1.score >= WIN_SCORE ? 'LEFT WINS!' : 'RIGHT WINS!';
+    const youWin = p1.score >= WIN_SCORE;
+    if (mode === '1p') winner = youWin ? 'YOU WIN!' : 'CPU WINS';
+    else if (isPortrait) winner = youWin ? 'BOTTOM WINS!' : 'TOP WINS!';
+    else winner = youWin ? 'LEFT WINS!' : 'RIGHT WINS!';
     ctx.font = `bold ${Math.floor(Math.min(W,H)*0.08)}px Courier New`;
     ctx.fillStyle = (mode === '1p' && !youWin) ? '#ff4466' : '#00ff88';
     ctx.fillText(winner, W/2, H/2 - 10);
@@ -448,13 +461,8 @@ function draw() {
   }
 }
 
-function loop() {
-  update();
-  draw();
-  requestAnimationFrame(loop);
-}
+function loop() { update(); draw(); requestAnimationFrame(loop); }
 
-// ---------- Input handlers ----------
 window.addEventListener('keydown', e => {
   const k = e.key.toLowerCase();
   keys[k] = true;
@@ -464,8 +472,7 @@ window.addEventListener('keydown', e => {
     if (gameOver) resetGame();
     else if (!ball.live) serve();
   }
-  if (['arrowup','arrowdown','arrowleft','arrowright',' '].includes(e.key.toLowerCase()) ||
-      e.code === 'Space') {
+  if (['arrowup','arrowdown','arrowleft','arrowright'].includes(k) || e.code === 'Space') {
     e.preventDefault();
   }
   if (['w','s','a','d','arrowup','arrowdown','arrowleft','arrowright'].includes(k)) {
@@ -474,13 +481,12 @@ window.addEventListener('keydown', e => {
 });
 window.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
 
-// Mouse (1p convenience on desktop)
 canvas.addEventListener('mousemove', e => {
   if (mode !== '1p') return;
   const rect = canvas.getBoundingClientRect();
   mousePos = isPortrait
     ? (e.clientX - rect.left) * (W / rect.width)
-    : (e.clientY - rect.top)  * (H / rect.height);
+    : (e.clientY - rect.top) * (H / rect.height);
   mouseActive = true;
 });
 canvas.addEventListener('click', () => {
@@ -489,45 +495,36 @@ canvas.addEventListener('click', () => {
   else if (!ball.live) serve();
 });
 
-// Touch — supports two simultaneous fingers, one per player in 2p mode
 function touchCoord(t) {
   const rect = canvas.getBoundingClientRect();
   return {
     x: (t.clientX - rect.left) * (W / rect.width),
-    y: (t.clientY - rect.top)  * (H / rect.height)
+    y: (t.clientY - rect.top) * (H / rect.height)
   };
 }
 
-// In portrait: top half controls p2, bottom half controls p1 (in 2p);
-// in 1p mode, anywhere controls p1.
-// In landscape: same idea, left/right halves.
 function assignTouch(t) {
   const c = touchCoord(t);
   if (mode === '1p') {
-    // single player only controls p1, no matter where they touch
     p1Touch = isPortrait ? c.x : c.y;
     return 'p1';
   }
-  // 2-player: split by side
   if (isPortrait) {
     if (c.y > H/2) { p1Touch = c.x; return 'p1'; }
-    else           { p2Touch = c.x; return 'p2'; }
+    else { p2Touch = c.x; return 'p2'; }
   } else {
     if (c.x < W/2) { p1Touch = c.y; return 'p1'; }
-    else           { p2Touch = c.y; return 'p2'; }
+    else { p2Touch = c.y; return 'p2'; }
   }
 }
 
-const activeTouches = {}; // id -> 'p1' | 'p2'
-
+const activeTouches = {};
 canvas.addEventListener('touchstart', e => {
   e.preventDefault();
   if (mode === null) return;
   for (const t of e.changedTouches) {
-    const which = assignTouch(t);
-    activeTouches[t.identifier] = which;
+    activeTouches[t.identifier] = assignTouch(t);
   }
-  // Tap also serves/restarts when ball isn't live
   if (gameOver) resetGame();
   else if (!ball.live) serve();
 }, { passive: false });
@@ -555,7 +552,6 @@ function endTouch(e) {
 canvas.addEventListener('touchend', endTouch);
 canvas.addEventListener('touchcancel', endTouch);
 
-// ---------- Menu ----------
 function startGame(m) {
   mode = m;
   resetGame();
@@ -565,14 +561,86 @@ function startGame(m) {
 document.getElementById('btn1p').addEventListener('click', () => startGame('1p'));
 document.getElementById('btn2p').addEventListener('click', () => startGame('2p'));
 
-// Helpful orientation hint on small screens
+// ---------- Install / Add to Home Screen ----------
+const installModal = document.getElementById('installModal');
+const installInstructions = document.getElementById('installInstructions');
+
+function detectPlatform() {
+  const ua = navigator.userAgent;
+  // iPadOS 13+ reports as Mac, but has touch
+  const isIOS = /iPhone|iPad|iPod/.test(ua) ||
+                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const isAndroid = /Android/.test(ua);
+  const isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(ua);
+  const isChrome = /Chrome|CriOS/.test(ua) && !/Edg/.test(ua);
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+                       window.navigator.standalone === true;
+  return { isIOS, isAndroid, isSafari, isChrome, isStandalone };
+}
+
+function buildInstructions() {
+  const p = detectPlatform();
+  if (p.isStandalone) {
+    return `<p style="color:#00ff88">✓ Boing is already installed on this device. You're playing the installed version right now!</p>`;
+  }
+  if (p.isIOS) {
+    if (!p.isSafari) {
+      return `
+        <p>iOS only allows installing web apps from <strong style="color:#00ff88">Safari</strong>. Tap the share menu in your current browser, choose "Open in Safari," then follow these steps:</p>
+        <div class="platform">iPhone / iPad — Safari</div>
+        <ol>
+          <li>Tap the <strong>Share button</strong> at the bottom of Safari (square with an up arrow ⬆).</li>
+          <li>Scroll down and tap <strong>Add to Home Screen</strong>.</li>
+          <li>Tap <strong>Add</strong> in the top-right corner.</li>
+        </ol>
+        <p>The Boing icon will appear on your home screen. Tap it to launch full-screen.</p>`;
+    }
+    return `
+      <div class="platform">iPhone / iPad</div>
+      <ol>
+        <li>Tap the <strong>Share button</strong> at the bottom of Safari (square with an up arrow ⬆).</li>
+        <li>Scroll down and tap <strong>Add to Home Screen</strong>.</li>
+        <li>Tap <strong>Add</strong> in the top-right corner.</li>
+      </ol>
+      <p>The Boing icon will appear on your home screen. Tap it to launch full-screen.</p>`;
+  }
+  if (p.isAndroid) {
+    return `
+      <div class="platform">Android</div>
+      <ol>
+        <li>Tap the <strong>⋮ menu</strong> (three dots, top right of Chrome).</li>
+        <li>Tap <strong>Add to Home screen</strong> or <strong>Install app</strong>.</li>
+        <li>Tap <strong>Add</strong> or <strong>Install</strong> to confirm.</li>
+      </ol>
+      <p>Boing will appear in your app drawer and on your home screen.</p>`;
+  }
+  return `
+    <div class="platform">Desktop</div>
+    <ol>
+      <li>Look for an <strong>install icon</strong> (often a small computer-with-arrow) in the right side of your address bar in Chrome or Edge.</li>
+      <li>Click it and choose <strong>Install</strong>.</li>
+    </ol>
+    <p>On phones, open this same link in your mobile browser to add Boing to your home screen.</p>`;
+}
+
+document.getElementById('btnInstall').addEventListener('click', () => {
+  installInstructions.innerHTML = buildInstructions();
+  installModal.classList.add('show');
+});
+document.getElementById('closeInstall').addEventListener('click', () => {
+  installModal.classList.remove('show');
+});
+installModal.addEventListener('click', e => {
+  if (e.target === installModal) installModal.classList.remove('show');
+});
+
 function updateOrientationHint() {
   if (window.innerWidth < 600) {
     orientationHint.textContent = isPortrait
-      ? '📱 Portrait mode — paddles top & bottom. Drag your half of the screen.'
-      : '📱 Landscape mode — paddles left & right. Drag your half.';
+      ? '📱 Portrait — paddles top & bottom. Drag your half of the screen.'
+      : '📱 Landscape — paddles left & right. Drag your half.';
   } else {
-    orientationHint.textContent = 'Tip: rotate your phone — the layout adapts.';
+    orientationHint.textContent = 'Tip: works on phones too — rotate to switch layouts.';
   }
 }
 
@@ -580,7 +648,6 @@ resize();
 updateOrientationHint();
 window.addEventListener('resize', updateOrientationHint);
 loop();
-
 })();
 </script>
 </body>
